@@ -7,11 +7,11 @@ class ThinkingSphinx::Configuration::ConsistentIds
 
   def reconcile
     return unless sphinx_internal_ids.any? { |attribute|
-      attribute.type == :bigint
+      attribute.type == :uuid
     }
 
     sphinx_internal_ids.each do |attribute|
-      attribute.type = :bigint
+      attribute.type = :uuid
     end
   end
 
