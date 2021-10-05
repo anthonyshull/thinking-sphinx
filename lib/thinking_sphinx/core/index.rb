@@ -33,7 +33,7 @@ module ThinkingSphinx::Core::Index
   def document_id_for_key(key)
     return nil if key.nil?
 
-    key * config.indices.count + offset
+    key
   end
 
   def interpret_definition!
