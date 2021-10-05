@@ -49,9 +49,11 @@ WHERE sphinx_internal_id IN (#{some_ids.join(', ')})
       return unless callbacks_enabled?
 
       ids.each_slice(1000) do |some_ids|
+        string_ids = some_ids.map { |id| "'#{id}'" }.join(', ')
+        
         execute <<-SQL
 DELETE FROM #{name}
-WHERE sphinx_internal_id IN (#{some_ids.join(', ')})
+WHERE sphinx_internal_id IN (#{string_ids})
         SQL
       end
     end

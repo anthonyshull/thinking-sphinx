@@ -45,10 +45,10 @@ class ThinkingSphinx::RealTime::Transcriber
   end
 
   def delete_existing(instances)
-    ids = instances.collect(&index.primary_key.to_sym)
+    ids = instances.collect(&index.primary_key.to_sym).map{ |id| "'#{id}'"}.join(', ')
 
     execute <<~SQL.strip
-      DELETE FROM #{@index.name} WHERE sphinx_internal_id IN (#{ids.join(', ')})
+      DELETE FROM #{@index.name} WHERE sphinx_internal_id IN (#{ids})
     SQL
   end
 
